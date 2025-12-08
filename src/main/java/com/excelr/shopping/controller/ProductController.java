@@ -66,7 +66,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("/add-product")
-	public Product addProduct()
+	public String addProduct()
 	{
 		Product product=Product.builder()
 				.title("laptop")
@@ -75,6 +75,7 @@ public class ProductController {
 				.rating(Rating.builder().rate(4.5).count(1000).build())
 				.build();
 		
-		return product;
+		productService.addProduct(product);
+		return "Product Addedd Successfully";
 	}
 }
