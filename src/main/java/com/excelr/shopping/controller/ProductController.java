@@ -159,6 +159,12 @@ public class ProductController {
 	{
 		return productService.addProduct(product);
 	}
+	
+	@PostMapping("/add-multiple-product-by-requestbody")
+	public List<Product> addMutipleProductByRequestBody(@RequestBody List<Product> products)
+	{
+		return productService.addProducts(products);
+	}
 }
 
 
