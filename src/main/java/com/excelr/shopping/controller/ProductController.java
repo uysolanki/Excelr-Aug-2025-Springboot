@@ -186,18 +186,18 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("/get-single-product1/{pid}")
-	public ResponseEntity<?> getSingleProduct1(@PathVariable int pid)
-	{
-		try
-		{
-		return new ResponseEntity<Product>(productService.getSingleProduct(pid),HttpStatus.OK);
-		}
-		catch(RuntimeException ex1)
-		{
-		return new ResponseEntity<String>(ex1.getMessage(),HttpStatus.BAD_REQUEST);
-		}
-	}
+//	@GetMapping("/get-single-product1/{pid}")
+//	public ResponseEntity<?> getSingleProduct1(@PathVariable int pid)
+//	{
+//		try
+//		{
+//		return new ResponseEntity<Product>(productService.getSingleProduct(pid),HttpStatus.OK);
+//		}
+//		catch(RuntimeException ex1)
+//		{
+//		return new ResponseEntity<String>(ex1.getMessage(),HttpStatus.BAD_REQUEST);
+//		}
+//	}
 	
 }
 
