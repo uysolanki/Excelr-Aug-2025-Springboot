@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.excelr.shopping.model.Product;
@@ -78,4 +81,99 @@ public class ProductController {
 		productService.addProduct(product);
 		return "Product Addedd Successfully";
 	}
+	
+	@PostMapping("/add-product-by-requestparam")
+	public Product addProductByRequestParam(@RequestParam("a") String pTtitle,
+			@RequestParam("b") double pPrice,
+			@RequestParam("c") String pDesc,
+			@RequestParam("d") String pCat,
+			@RequestParam("e") String pImage,
+			@RequestParam("f") double pRate,
+			@RequestParam("g") int pCount
+			)
+	{
+		Product product=Product.builder()
+				.title(pTtitle)
+				.description(pDesc)
+				.price(pPrice)
+				.category(pCat)
+				.image(pImage)
+				.rating(Rating.builder().rate(pRate).count(pCount).build())
+				.build();
+		
+		return productService.addProduct(product);
+		//return "Product Addedd Successfully";
+	}
+	
+	
+	@PostMapping("/add-product-by-pathvariable/{a}/{b}/{c}/{d}/{e}/{f}/{g}")
+	public Product addProductByPathVariable(@PathVariable("a") String pTtitle,
+			@PathVariable("b") double pPrice,
+			@PathVariable("c") String pDesc,
+			@PathVariable("d") String pCat,
+			@PathVariable("e") String pImage,
+			@PathVariable("f") double pRate,
+			@PathVariable("g") int pCount
+			)
+	{
+		Product product=Product.builder()
+				.title(pTtitle)
+				.description(pDesc)
+				.price(pPrice)
+				.category(pCat)
+				.image(pImage)
+				.rating(Rating.builder().rate(pRate).count(pCount).build())
+				.build();
+		
+		return productService.addProduct(product);
+		//return "Product Addedd Successfully";
+	}
+	
+	
+	@PostMapping("/add-product-by-pathvariable1/{pTtitle}/{pPrice}/{pDesc}/{pCat}/{pImage}/{pRate}/{pCount}")
+	public Product addProductByPathVariable1(@PathVariable String pTtitle,
+			@PathVariable double pPrice,
+			@PathVariable String pDesc,
+			@PathVariable String pCat,
+			@PathVariable String pImage,
+			@PathVariable double pRate,
+			@PathVariable int pCount
+			)
+	{
+		Product product=Product.builder()
+				.title(pTtitle)
+				.description(pDesc)
+				.price(pPrice)
+				.category(pCat)
+				.image(pImage)
+				.rating(Rating.builder().rate(pRate).count(pCount).build())
+				.build();
+		
+		return productService.addProduct(product);
+		//return "Product Addedd Successfully";
+	}
+	
+	
+	@PostMapping("/add-product-by-requestbody")
+	public Product addProductByRequestBody(@RequestBody Product product)
+	{
+		return productService.addProduct(product);
+	}
 }
+
+
+/*
+ {
+    "id": 6,
+    "title": "Mens Casual Slim Fit",
+    "price": 15.99,
+    "description": "The color could be slightly different between on the screen and in practice",
+    "category": "men's clothing",
+    "image": "myimage1.png",
+    "rating": {
+        "rid": 6,
+        "rate": 2.1,
+        "count": 430
+    }
+}
+*/
