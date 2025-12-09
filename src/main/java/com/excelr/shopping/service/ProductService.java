@@ -28,7 +28,8 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
-	public Product getSingleProduct(int pid) {
+	public Product getSingleProduct(int pid) 
+	{
 		Optional<Product> optionalProduct=productRepository.findById(pid);
 		Product product=null;
 		if(optionalProduct.isPresent())

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -171,17 +173,32 @@ public class ProductController {
 	
 	
 	@GetMapping("/get-all-products")
-	public List<Product> getAllProducts()
+	public ResponseEntity<List<Product>> getAllProducts()
 	{
-		return productService.getAllProducts();
+		return new ResponseEntity<List<Product>>(productService.getAllProducts(),HttpStatus.OK);
 	}
 	
 	
 	@GetMapping("/get-single-product/{pid}")
-	public Product getSingleProduct(@PathVariable int pid)
+	public ResponseEntity<Product> getSingleProduct(@PathVariable int pid)
 	{
-		return productService.getSingleProduct(pid);
+		return new  ResponseEntity<Product>(productService.getSingleProduct(pid),HttpStatus.OK);
 	}
+	
+	
+	@GetMapping("/get-single-product1/{pid}")
+	public ResponseEntity<?> getSingleProduct1(@PathVariable int pid)
+	{
+		try
+		{
+		return new ResponseEntity<Product>(productService.getSingleProduct(pid),HttpStatus.OK);
+		}
+		catch(RuntimeException ex1)
+		{
+		return new ResponseEntity<String>(ex1.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 }
 
 
