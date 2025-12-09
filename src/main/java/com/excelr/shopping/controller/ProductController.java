@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -164,6 +165,22 @@ public class ProductController {
 	public List<Product> addMutipleProductByRequestBody(@RequestBody List<Product> products)
 	{
 		return productService.addProducts(products);
+	}
+	
+	//***************************
+	
+	
+	@GetMapping("/get-all-products")
+	public List<Product> getAllProducts()
+	{
+		return productService.getAllProducts();
+	}
+	
+	
+	@GetMapping("/get-single-product/{pid}")
+	public Product getSingleProduct(@PathVariable int pid)
+	{
+		return productService.getSingleProduct(pid);
 	}
 }
 

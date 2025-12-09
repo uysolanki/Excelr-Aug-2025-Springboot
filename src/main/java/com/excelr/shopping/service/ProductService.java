@@ -1,9 +1,9 @@
 package com.excelr.shopping.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.excelr.shopping.model.Product;
@@ -22,6 +22,22 @@ public class ProductService {
 
 	public List<Product> addProducts(List<Product> products) {
 		return productRepository.saveAll(products);
+	}
+
+	public List<Product> getAllProducts() {
+		return productRepository.findAll();
+	}
+
+	public Product getSingleProduct(int pid) {
+		Optional<Product> optionalProduct=productRepository.findById(pid);
+		Product product=null;
+		if(optionalProduct.isPresent())
+		{
+			product=optionalProduct.get();
+			return product;
+		}
+		
+		throw new RuntimeException("Product Not Found");
 	}
 	
 }
