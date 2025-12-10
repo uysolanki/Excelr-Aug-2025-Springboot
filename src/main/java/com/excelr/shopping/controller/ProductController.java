@@ -199,6 +199,13 @@ public class ProductController {
 //		}
 //	}
 	
+	
+	@GetMapping("/get-product-by-category/{category}")
+	public ResponseEntity<Product> getProductByCategory(@PathVariable String category)
+	{
+		return new  ResponseEntity<Product>(productService.getProductByCategory(category),HttpStatus.OK);
+	}
+	
 }
 
 

@@ -40,5 +40,9 @@ public class ProductService {
 		
 		throw new RuntimeException("Product Not Found");
 	}
+
+	public Product getProductByCategory(String category) {
+		
+	}
 	
 }

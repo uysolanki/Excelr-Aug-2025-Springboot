@@ -1,3 +1,4 @@
+//https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
 package com.excelr.shopping.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
