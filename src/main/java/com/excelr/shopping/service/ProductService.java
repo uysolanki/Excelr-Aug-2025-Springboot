@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.excelr.shopping.exception.ResourseNotFoundException;
 import com.excelr.shopping.model.Product;
+import com.excelr.shopping.model.Rating;
 import com.excelr.shopping.repository.ProductRepository;
 
 @Service
@@ -56,6 +57,21 @@ public class ProductService {
 			throw new ResourseNotFoundException("Product Numbder "+pid+ " does not exist in the database");
 		}
 		productRepository.deleteById(pid);
+	}
+
+	public Product updateProduct(int pid, Product newValues) {
+		if(!productRepository.existsById(pid))
+		{
+			throw new ResourseNotFoundException("Product Numbder "+pid+ " does not exist in the database");
+		}
+		Product prodFromDB=getSingleProduct(pid);
+		prodFromDB.setCategory(newValues.getCategory());
+		prodFromDB.setDescription(newValues.getDescription());
+		prodFromDB.setImage(newValues.getImage());
+		prodFromDB.setPrice(newValues.getPrice());
+		prodFromDB.setTitle(newValues.getTitle());
+		
+		return productRepository.save(prodFromDB);
 	}
 	
 }
