@@ -13,6 +13,12 @@ public class GlobalExceptionHandler {
 	{ 
 			return new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(ResourseNotFoundException.class)
+	public ResponseEntity<String> handlePlayerNotFound(ResourseNotFoundException ex)
+	{ 
+			return new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
+	}
 
 
 

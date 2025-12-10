@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.excelr.shopping.exception.ResourseNotFoundException;
 import com.excelr.shopping.model.Product;
 import com.excelr.shopping.repository.ProductRepository;
 
@@ -50,8 +51,11 @@ public class ProductService {
 	}
 
 	public void deleteProduct(int pid) {
+		if(!productRepository.existsById(pid))
+		{
+			throw new ResourseNotFoundException("Product Numbder "+pid+ " does not exist in the database");
+		}
 		productRepository.deleteById(pid);
-		
 	}
 	
 }

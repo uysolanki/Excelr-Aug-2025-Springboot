@@ -217,7 +217,7 @@ public class ProductController {
 	public ResponseEntity<String> deleteProduct(@PathVariable int pid)
 	{
 		productService.deleteProduct(pid);
-		return new  ResponseEntity<String>("Product Deleted",HttpStatus.OK);
+		return new  ResponseEntity<String>("Product Deleted with ID "+pid,HttpStatus.OK);
 	}
 	
 }
