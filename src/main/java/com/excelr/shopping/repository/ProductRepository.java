@@ -11,7 +11,7 @@ import com.excelr.shopping.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>
 {
-		List<Product> findByCategoryContaining(String s);
+		List<Product> findByCategory(String s);
 		
 		List<Product> findByPriceGreaterThanEqual(double a);
 }

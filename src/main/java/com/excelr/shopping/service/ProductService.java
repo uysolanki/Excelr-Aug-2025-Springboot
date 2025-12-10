@@ -42,11 +42,16 @@ public class ProductService {
 	}
 
 	public List<Product> getProductByCategory(String category) {
-		return productRepository.findByCategoryContaining(category);
+		return productRepository.findByCategory(category);
 	}
 
 	public List<Product> getProductByPricegreaterthan(double basePrice) {
 		return productRepository.findByPriceGreaterThanEqual(basePrice);
+	}
+
+	public void deleteProduct(int pid) {
+		productRepository.deleteById(pid);
+		
 	}
 	
 }
