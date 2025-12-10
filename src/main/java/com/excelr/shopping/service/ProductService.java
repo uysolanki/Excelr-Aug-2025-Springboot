@@ -41,8 +41,12 @@ public class ProductService {
 		throw new RuntimeException("Product Not Found");
 	}
 
-	public Product getProductByCategory(String category) {
-		
+	public List<Product> getProductByCategory(String category) {
+		return productRepository.findByCategoryContaining(category);
+	}
+
+	public List<Product> getProductByPricegreaterthan(double basePrice) {
+		return productRepository.findByPriceGreaterThanEqual(basePrice);
 	}
 	
 }

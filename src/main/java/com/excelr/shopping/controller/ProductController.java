@@ -201,9 +201,15 @@ public class ProductController {
 	
 	
 	@GetMapping("/get-product-by-category/{category}")
-	public ResponseEntity<Product> getProductByCategory(@PathVariable String category)
+	public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String category)
 	{
-		return new  ResponseEntity<Product>(productService.getProductByCategory(category),HttpStatus.OK);
+		return new  ResponseEntity<List<Product>>(productService.getProductByCategory(category),HttpStatus.OK);
+	}
+	
+	@GetMapping("/get-product-by-pricegreaterthan/{basePrice}")
+	public ResponseEntity<List<Product>> getProductByPricegreaterthan(@PathVariable double basePrice)
+	{
+		return new  ResponseEntity<List<Product>>(productService.getProductByPricegreaterthan(basePrice),HttpStatus.OK);
 	}
 	
 }
