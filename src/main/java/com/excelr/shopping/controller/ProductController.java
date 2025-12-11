@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.excelr.shopping.dto.ProductRequestDTO;
+import com.excelr.shopping.dto.ProductResponseDTO;
 import com.excelr.shopping.model.Product;
 import com.excelr.shopping.model.Rating;
 import com.excelr.shopping.service.ProductService;
@@ -34,7 +36,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/product")
-	public Product greet1()
+	public ResponseEntity<String> greet1()
 	{
 		Product product=Product.builder()
 				.title("laptop")
@@ -43,11 +45,11 @@ public class ProductController {
 				.rating(Rating.builder().rate(4.5).count(1000).build())
 				.build();
 		
-		return product;
+		return new ResponseEntity<String>("Product Addedd Successfully",HttpStatus.OK);
 	}
 	
 	@RequestMapping("/productList")
-	public List<Product> productList()
+	public ResponseEntity<List<Product>> productList()
 	{
 		Product product1=Product.builder()
 				.title("laptop")
@@ -70,11 +72,13 @@ public class ProductController {
 				.rating(Rating.builder().rate(4.5).count(1000).build())
 				.build();
 		List<Product> products=new ArrayList(Arrays.asList(product1,product2,product3));
-		return products;
+		
+		
+		return new ResponseEntity<List<Product>>(products,HttpStatus.OK);
 	}
 	
 	@PostMapping("/add-product")
-	public String addProduct()
+	public ResponseEntity<String> addProduct()
 	{
 		Product product=Product.builder()
 				.title("laptop")
@@ -84,7 +88,7 @@ public class ProductController {
 				.build();
 		
 		productService.addProduct(product);
-		return "Product Addedd Successfully";
+		return new ResponseEntity<String>("Product Addedd Successfully",HttpStatus.OK);
 	}
 	
 	@PostMapping("/add-product-by-requestparam")
@@ -169,6 +173,13 @@ public class ProductController {
 	public List<Product> addMutipleProductByRequestBody(@RequestBody List<Product> products)
 	{
 		return productService.addProducts(products);
+	}
+	
+	
+	@PostMapping("/add-product-by-dto")
+	public ProductResponseDTO addProductByDTO(@RequestBody ProductRequestDTO productRerDTO)
+	{
+		return productService.addProductByDTO(productRerDTO);
 	}
 	
 	//***************************

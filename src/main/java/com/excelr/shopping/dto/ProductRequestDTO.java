@@ -1,4 +1,4 @@
-package com.excelr.shopping.model;
+package com.excelr.shopping.dto;
 
 import java.time.LocalDateTime;
 
@@ -20,40 +20,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-@Entity
 @Builder
-public class Product {
+public class ProductRequestDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	
 	private String title;
 	private double price;
 	private String description;
 	private String category;
 	private String image;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinColumn(name="rating", referencedColumnName = "rid")
-	Rating rating;
+	RatingRequestDTO rating;
 	
-	private LocalDateTime createdAt;
 	
-    private LocalDateTime modifiedAt;
-	
-	@PrePersist
-	protected void atCreation()
-	{
-		LocalDateTime now=LocalDateTime.now();
-		this.createdAt=now;
-		this.modifiedAt=now;
-	}
-	
-	@PreUpdate
-	protected void atUpdation()
-	{
-		this.modifiedAt=LocalDateTime.now();
-	}
 
 
 	

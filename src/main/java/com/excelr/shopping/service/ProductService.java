@@ -3,9 +3,12 @@ package com.excelr.shopping.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.excelr.shopping.dto.ProductRequestDTO;
+import com.excelr.shopping.dto.ProductResponseDTO;
 import com.excelr.shopping.exception.ResourseNotFoundException;
 import com.excelr.shopping.model.Product;
 import com.excelr.shopping.model.Rating;
@@ -16,7 +19,10 @@ public class ProductService {
 
 	@Autowired
 	ProductRepository productRepository;
-
+	
+	@Autowired
+	ModelMapper modelMapper;
+	
 	public Product addProduct(Product product) {
 		return productRepository.save(product);
 		
@@ -74,6 +80,12 @@ public class ProductService {
 		prodFromDB.getRating().setCount(newValues.getRating().getCount());
 		
 		return productRepository.save(prodFromDB);
+	}
+
+	public ProductResponseDTO addProductByDTO(ProductRequestDTO productReqDTO) {
+		Product product = modelMapper.map(productReqDTO, Product.class);
+		Product savedProduct=productRepository.save(product);
+		return modelMapper.map(savedProduct, ProductResponseDTO.class);
 	}
 	
 }
