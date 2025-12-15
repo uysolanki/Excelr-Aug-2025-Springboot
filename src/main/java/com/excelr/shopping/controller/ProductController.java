@@ -23,6 +23,8 @@ import com.excelr.shopping.model.Product;
 import com.excelr.shopping.model.Rating;
 import com.excelr.shopping.service.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class ProductController {
 
@@ -177,7 +179,7 @@ public class ProductController {
 	
 	
 	@PostMapping("/add-product-by-dto")
-	public ProductResponseDTO addProductByDTO(@RequestBody ProductRequestDTO productRerDTO)
+	public ProductResponseDTO addProductByDTO(@Valid @RequestBody ProductRequestDTO productRerDTO)
 	{
 		return productService.addProductByDTO(productRerDTO);
 	}
