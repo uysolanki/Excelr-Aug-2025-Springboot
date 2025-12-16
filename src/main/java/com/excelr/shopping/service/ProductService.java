@@ -76,9 +76,11 @@ public class ProductService {
 		prodFromDB.setImage(newValues.getImage());
 		prodFromDB.setPrice(newValues.getPrice());
 		prodFromDB.setTitle(newValues.getTitle());
+		if(newValues.getRating()!=null)
+		{
 		prodFromDB.getRating().setRate(newValues.getRating().getRate());
 		prodFromDB.getRating().setCount(newValues.getRating().getCount());
-		
+		}
 		return productRepository.save(prodFromDB);
 	}
 
