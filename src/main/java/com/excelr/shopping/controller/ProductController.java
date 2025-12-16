@@ -94,13 +94,13 @@ public class ProductController {
 	}
 	
 	@PostMapping("/add-product-by-requestparam")
-	public Product addProductByRequestParam(@RequestParam("a") String pTtitle,
-			@RequestParam("b") double pPrice,
-			@RequestParam("c") String pDesc,
-			@RequestParam("d") String pCat,
-			@RequestParam("e") String pImage,
-			@RequestParam("f") double pRate,
-			@RequestParam("g") int pCount
+	public Product addProductByRequestParam(@RequestParam("productTitle") String pTtitle,
+			@RequestParam("producTPrice") double pPrice,
+			@RequestParam("productDesc") String pDesc,
+			@RequestParam("productCategory") String pCat,
+			@RequestParam("productImage") String pImage,
+			@RequestParam("productRatingRate") double pRate,
+			@RequestParam("productRatingCount") int pCount
 			)
 	{
 		Product product=Product.builder()
