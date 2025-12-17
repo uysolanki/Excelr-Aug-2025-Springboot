@@ -32,17 +32,23 @@ body {
 }
 
 .product-img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;  /* ✅ shows full image */
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 4px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	width: 80px;
+	height: 80px;
+	object-fit: contain; /* ✅ shows full image */
+	background-color: #fff;
+	border-radius: 12px;
+	padding: 4px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .action-btn svg {
 	width: 22px;
 	height: 22px;
+}
+
+.price-cell {
+	white-space: nowrap;
+	font-weight: 600;
 }
 </style>
 </head>
@@ -79,7 +85,7 @@ body {
 								<td th:text="${product.title}"></td>
 								<td th:text="${product.description}"></td>
 								<td th:text="${product.category}"></td>
-								<td class="fw-semibold text-success">₹ <span
+								<td class="price-cell text-success">₹ <span
 									th:text="${product.price}"></span>
 								</td>
 								<td><img th:src="@{${product.image}}" class="product-img"
