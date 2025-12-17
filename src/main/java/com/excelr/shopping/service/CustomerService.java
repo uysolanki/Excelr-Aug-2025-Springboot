@@ -40,7 +40,7 @@ public class CustomerService {
 		
 		User user = new User();
 		user.setPassword(customerRequestDto.getCustomerPassword());
-		user.setUserName(customerRequestDto.getCustomerEmail());
+//		user.setUserName(passwordEncoder.encode(customerRequestDto.getCustomerEmail()));
 		user.setRoles(List.of(userRole));
 		userRepository.save(user);
 		
