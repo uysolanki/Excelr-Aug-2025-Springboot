@@ -73,6 +73,5 @@ public class ProductControllerFE {
 		productService.updateProduct(prodId,newValues);
 		return "redirect:/amazon/all-products";
 	}
-	
 }
 
