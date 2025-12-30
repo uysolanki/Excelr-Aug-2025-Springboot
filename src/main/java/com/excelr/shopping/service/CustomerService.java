@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.excelr.shopping.dto.CustomerRequestDto;
 import com.excelr.shopping.dto.CustomerResponseDto;
-import com.excelr.shopping.model.Customer;
-import com.excelr.shopping.model.CustomerAddress;
-import com.excelr.shopping.model.Role;
-import com.excelr.shopping.model.User;
+import com.excelr.shopping.entity.Customer;
+import com.excelr.shopping.entity.CustomerAddress;
+import com.excelr.shopping.entity.Role;
+import com.excelr.shopping.entity.User;
 import com.excelr.shopping.repository.CustomerRepository;
 import com.excelr.shopping.repository.RoleRepository;
 import com.excelr.shopping.repository.UserRepository;
@@ -25,8 +26,8 @@ public class CustomerService {
 	@Autowired
 	ModelMapper modelMapper;
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	RoleRepository roleRepository;
@@ -39,8 +40,9 @@ public class CustomerService {
 		Role userRole=roleRepository.findByRoleName("USER").orElseThrow(()->new RuntimeException("USER role not found"));
 		
 		User user = new User();
-		user.setPassword(customerRequestDto.getCustomerPassword());
-//		user.setUserName(passwordEncoder.encode(customerRequestDto.getCustomerEmail()));
+		user.setUserName(customerRequestDto.getCustomerEmail());
+		user.setPassword(passwordEncoder.encode(customerRequestDto.getCustomerPassword()));
+		
 		user.setRoles(List.of(userRole));
 		userRepository.save(user);
 		
